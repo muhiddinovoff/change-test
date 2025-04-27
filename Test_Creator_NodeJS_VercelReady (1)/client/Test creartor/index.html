@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rash Modeli Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Landing Page -->
+        <div id="landingPage" class="text-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-12 fade-in">Rash Modeli Test Tizimi</h1>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <button id="createTest" class="w-full sm:w-64 py-4 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">Test Yaratish</button>
+                <button id="takeTest" class="w-full sm:w-64 py-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">Test Ishlash</button>
+            </div>
+        </div>
+
+        <!-- Test Creator Options (Hidden Initially) -->
+        <div id="creatorOptions" class="text-center hidden">
+            <button id="backToHomeFromCreatorOptions" class="mb-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+            <h1 class="text-4xl font-bold text-gray-800 mb-12 fade-in">Test Yaratish</h1>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <button id="loginCreator" class="w-full sm:w-64 py-4 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">Foydalanuvchi Orqali Kirish</button>
+                <a href="https://t.me/mukhiddinovv_7" target="_blank" id="registerCreator" class="w-full sm:w-64 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">Ro'yxatdan O'tish</a>
+            </div>
+        </div>
+
+        <!-- User ID Input Section (Hidden Initially) -->
+        <div id="userIdSection" class="bg-white p-6 rounded-lg shadow-md mb-6 fade-in hidden">
+            <button id="backToHomeFromUserId" class="mb-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+            <label for="userId" class="block text-gray-600 mb-2">Foydalanuvchi raqamini kiriting:</label>
+            <input type="text" id="userId" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4" placeholder="Foydalanuvchi raqami">
+            <button id="submitUserId" class="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Kirish</button>
+            <p id="userIdError" class="text-red-600 mt-2 hidden">Iltimos telegram orqali @mukhiddinovv_7 ga murojaat qiling</p>
+        </div>
+
+        <!-- Create Test Form (Hidden Initially) -->
+        <div id="createTestForm" class="hidden">
+            <button id="backToHomeFromCreateTest" class="mb-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-8 fade-in">Test Yaratish</h1>
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <label class="block text-gray-600 mb-2">Test ID:</label>
+                <p id="generatedTestId" class="text-xl font-semibold text-indigo-600"></p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Test Vaqtini Belgilang (Toshkent vaqti, UTC+5)</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-gray-600 mb-1">Boshlanish Vaqti:</label>
+                        <input type="datetime-local" id="startTime" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-1">Tugash Vaqti:</label>
+                        <input type="datetime-local" id="endTime" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                </div>
+            </div>
+            <form id="answerKeyForm" class="space-y-6">
+                <!-- Questions 1-32: 4 options (A, B, C, D) -->
+                <div id="createQuestions1to32" class="space-y-4"></div>
+                <!-- Questions 33-35: 6 options (A, B, C, D, E, F) -->
+                <div id="createQuestions33to35" class="space-y-4"></div>
+                <!-- Questions 36-45: Text input for a and b parts -->
+                <div id="createQuestions36to45" class="space-y-4"></div>
+                <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Javob Kalitini Saqlash</button>
+            </form>
+            <div id="resultsView" class="mt-6 hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Test Natijalari</h2>
+                <div id="resultsList" class="space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- User Info Input Section (Hidden Initially) -->
+        <div id="userInfoSection" class="bg-white p-6 rounded-lg shadow-md mb-6 fade-in hidden">
+            <button id="backToHomeFromUserInfo" class="mb-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+            <label for="firstName" class="block text-gray-600 mb-2">Ism:</label>
+            <input type="text" id="firstName" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4" placeholder="Ismingiz">
+            <label for="lastName" class="block text-gray-600 mb-2">Familya:</label>
+            <input type="text" id="lastName" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4" placeholder="Familyangiz">
+            <button id="submitUserInfo" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Davom etish</button>
+            <p id="userInfoError" class="text-red-600 mt-2 hidden">Iltimos, ism va familyani kiriting!</p>
+        </div>
+
+        <!-- Test ID Input Section (Hidden Initially) -->
+        <div id="testIdSection" class="bg-white p-6 rounded-lg shadow-md mb-6 fade-in hidden">
+            <button id="backToHomeFromTestId" class="mb-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+            <label for="testId" class="block text-gray-600 mb-2">Test ID ni kiriting:</label>
+            <input type="text" id="testId" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4" placeholder="Test ID">
+            <button id="submitTestId" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Kirish</button>
+            <p id="testIdError" class="text-red-600 mt-2 hidden">Iltimos, to'g'ri Test ID ni kiriting!</p>
+            <p id="timeError" class="text-red-600 mt-2 hidden">Test faqat belgilangan vaqtda ishlaydi!</p>
+        </div>
+
+        <!-- Quiz Form (Hidden Initially) -->
+        <form id="quizForm" class="space-y-6 hidden">
+            <button id="backToHomeFromQuiz" class="mb-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-8 fade-in">Rash Modeli Test</h1>
+            <!-- Questions 1-32: 4 options (A, B, C, D) -->
+            <div id="questions1to32" class="space-y-4"></div>
+            <!-- Questions 33-35: 6 options (A, B, C, D, E, F) -->
+            <div id="questions33to35" class="space-y-4"></div>
+            <!-- Questions 36-45: Text input for a and b parts -->
+            <div id="questions36to45" class="space-y-4"></div>
+            <button type="submit" id="submitQuizButton" disabled class="w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1 opacity-50 cursor-not-allowed">Tekshirish</button>
+        </form>
+
+        <!-- Result Screen (Hidden Initially) -->
+        <div id="resultScreen" class="hidden space-y-6">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-8 fade-in">Test Natijalari</h1>
+            <div id="resultSummary" class="bg-white p-6 rounded-lg shadow-md fade-in"></div>
+            <button id="backToHomeFromResult" class="w-full sm:w-auto px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1">Bosh Sahifaga Qaytish</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+}
+
+/* Custom button style for answer options */
+.answer-option input[type="radio"] {
+    display: none;
+}
+
+.answer-option label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 40px;
+    border: 2px solid #6B46C1;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.answer-option input[type="radio"]:checked + label {
+    background-color: #a5b4fc;
+    color: #1f2937;
+}
+
+.answer-option label:hover {
+    background-color: #e0e7ff;
+}
+
+/* Hover effect for text inputs */
+.text-answer-option:hover {
+    background-color: #e0e7ff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Gradient background */
+body {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+}
